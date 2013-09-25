@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ 
 package com.example.bufferandroidproject.abs;
 
 import static com.actionbarsherlock.app.ActionBar.NAVIGATION_MODE_LIST;
@@ -59,12 +59,17 @@ import java.util.Set;
 
 import org.eclipse.egit.github.core.User;
 
-/**
+*//**
  * Home screen activity
- */
+ *//*
 public class HomeActivity extends TabPagerActivity<CustomPagerAdapter> implements
         OnNavigationListener, OrganizationSelectionProvider,
         LoaderCallbacks<List<User>> {
+	
+    *//**
+     * News icon
+     *//*
+    public static final String ICON_NEWS = "\uf234";
 
     private static final String TAG = "HomeActivity";
 
@@ -292,13 +297,14 @@ public class HomeActivity extends TabPagerActivity<CustomPagerAdapter> implement
         case 0:
             return ICON_NEWS;
         case 1:
-            return ICON_PUBLIC;
+            return ICON_NEWS;
         case 2:
-            return isDefaultUser ? ICON_WATCH : ICON_TEAM;
+            return ICON_NEWS;
         case 3:
-            return ICON_FOLLOW;
+            return ICON_NEWS;
         default:
             return super.getIcon(position);
         }
     }
 }
+*/

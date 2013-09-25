@@ -15,6 +15,9 @@
  */
 package com.example.bufferandroidproject.abs;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,12 +25,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.github.mobile.R.string;
-import com.github.mobile.ui.FragmentPagerAdapter;
-import com.github.mobile.ui.repo.RepositoryListFragment;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Pager adapter for a user's different views
@@ -59,15 +56,19 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
         case 0:
-            return defaultUser ? new UserReceivedNewsFragment()
-                    : new OrganizationNewsFragment();
+//            return defaultUser ? new UserReceivedNewsFragment()
+//                    : new OrganizationNewsFragment();
+        	return new CustomPagerFragment();
         case 1:
-            return new RepositoryListFragment();
+//            return new RepositoryListFragment();
+        	return new CustomPagerFragment();
         case 2:
-            return defaultUser ? new MyFollowersFragment()
-                    : new MembersFragment();
+        	return new CustomPagerFragment();
+//            return defaultUser ? new MyFollowersFragment()
+//                    : new MembersFragment();
         case 3:
-            return new MyFollowingFragment();
+        	return new CustomPagerFragment();
+//            return new MyFollowingFragment();
         default:
             return null;
         }
@@ -119,14 +120,13 @@ public class CustomPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
         case 0:
-            return resources.getString(string.tab_news);
+            return "one";
         case 1:
-            return resources.getString(string.tab_repositories);
+            return "two";
         case 2:
-            return resources.getString(defaultUser ? string.tab_followers_self
-                    : string.tab_members);
+            return "three";
         case 3:
-            return resources.getString(string.tab_following_self);
+            return "four";
         default:
             return null;
         }
