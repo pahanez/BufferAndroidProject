@@ -3,6 +3,7 @@ package com.example.bufferandroidproject.abs;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -17,7 +18,13 @@ public class CustomPagerFragment extends ItemListFragment<String> {
 		return new AsyncLoader<List<String>>(getActivity()) {
 			@Override
 			public List<String> loadInBackground() {
-				return Arrays.asList("kimono_1","kimono_2","kimono_3");
+				try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return Arrays.asList("data_1","data_2","data_3","data_4","data_5","data_6","data_7","data_8");
 			}
 		};
 	}
@@ -30,9 +37,8 @@ public class CustomPagerFragment extends ItemListFragment<String> {
 
 	@Override
 	protected SingleTypeAdapter<String> createAdapter(List<String> items) {
-		// TODO Auto-generated method stub
 		return new CustomStringAdapter(getActivity(),
-				(String[]) items.toArray());
+				items.toArray(new String[items.size()]));
 	}
 
 }

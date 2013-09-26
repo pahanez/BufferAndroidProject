@@ -43,6 +43,15 @@ public class CustomActivity extends TabPagerActivity<CustomPagerAdapter> impleme
 			return super.getIcon(position);
 		}
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (adapter == null)
+			configureTabPager();
+
+	}
+	
 
 	@Override
 	public Loader<List<String>> onCreateLoader(int arg0, Bundle arg1) {
