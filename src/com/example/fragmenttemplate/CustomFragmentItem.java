@@ -2,12 +2,11 @@ package com.example.fragmenttemplate;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
-import com.actionbarsherlock.app.SherlockListFragment;
+import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fragmenttemplate.utils.ViewFinder;
 
-public class CustomFragmentItem extends SherlockListFragment{
+public class CustomFragmentItem extends SherlockFragment{
 	
 	protected ViewFinder mViewFinder;
 	
@@ -16,12 +15,6 @@ public class CustomFragmentItem extends SherlockListFragment{
 		super.onViewCreated(view, savedInstanceState);
 		
 		mViewFinder = new ViewFinder(view);
-	}
-	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		setListAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,new String[]{"1","2","3"}));
 	}
 	
 	 /**

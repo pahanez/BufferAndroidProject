@@ -12,4 +12,10 @@ public class CstmFrgImpl extends CustomFragmentItem{
 		
 		return inflater.inflate(R.layout.fragment_activity, null, false);
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+//		setListAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,new String[]{"1","2","3"}));
+	}
 }

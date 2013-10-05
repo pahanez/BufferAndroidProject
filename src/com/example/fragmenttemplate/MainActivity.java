@@ -10,7 +10,7 @@ public class MainActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new CustomFragmentItem()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new CstmFrgImpl()).commit();
 	}
 
 	@Override
