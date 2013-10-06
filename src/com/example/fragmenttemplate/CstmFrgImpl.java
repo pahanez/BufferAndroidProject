@@ -1,27 +1,39 @@
 package com.example.fragmenttemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
+import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CstmFrgImpl extends AListFragment<String> {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+import com.example.fragmenttemplate.loaders.CustomLoader;
+import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 
-		return inflater.inflate(R.layout.fragment_activity, null, false);
-	}
+public class CstmFrgImpl extends AListFragment<String> {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListAdapter().getWrappedAdapter().setItems(
-				new String[] { "1", "2", "3" });
+		setEmptyText("No results found");
+		
+		new Handler(getActivity().getMainLooper()){
+			public void handleMessage(android.os.Message msg) {
+				getActivity().runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						refreshWithProgress();
+					}
+				});
+			};
+		}.sendEmptyMessageDelayed(1, 5000);
 	}
 
 	@Override
@@ -45,4 +57,27 @@ public class CstmFrgImpl extends AListFragment<String> {
 	protected int getErrorMessage(Exception exception) {
 		return 0;
 	}
+	
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+	}
+	@Override
+	public Loader<List<String>> onCreateLoader(int arg0, Bundle arg1) {
+
+		return new CustomLoader<List<String>>(getActivity()){
+			@Override
+			public List<String> loadInBackground() {
+				try {
+					TimeUnit.SECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				return new ArrayList<String>(Arrays.asList( new String[] { "data____1", "data____2", "data____3" }));
+			}
+		};
+	}
+	
 }

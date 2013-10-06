@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,14 +55,17 @@ public abstract class AListFragment<E> extends CustomFragmentItem implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		return inflater.inflate(R.layout.item_list, null);
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		emptyView = mViewFinder.find(android.R.id.empty);
+		progressBar = mViewFinder.find(R.id.pb_loading); 
 		listView = mViewFinder.find(android.R.id.list);
+		
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -70,10 +74,10 @@ public abstract class AListFragment<E> extends CustomFragmentItem implements
 				onListItemClick((ListView) parent, view, position, id);
 			}
 		});
-		progressBar = mViewFinder.find(R.id.pb_loading);
 
-		emptyView = mViewFinder.find(android.R.id.empty);
-
+		Log.e("p37td8","listView : " + listView);
+		Log.e("p37td8","emptyView : " + emptyView);
+		Log.e("p37td8","progressBar : " + progressBar);
 		configureList(getActivity(), getListView());
 	}
 
@@ -82,6 +86,8 @@ public abstract class AListFragment<E> extends CustomFragmentItem implements
 		super.onActivityCreated(savedInstanceState);
 		if (!items.isEmpty())
 			setListShown(true, false);
+		
+		getLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
@@ -350,12 +356,6 @@ public abstract class AListFragment<E> extends CustomFragmentItem implements
 		// if (loader instanceof ThrowableLoader)
 		// return ((ThrowableLoader<List<E>>) loader).clearException();
 		// else
-		return null;
-	}
-
-	@Override
-	public Loader<List<E>> onCreateLoader(int arg0, Bundle arg1) {
-		// TODO
 		return null;
 	}
 
