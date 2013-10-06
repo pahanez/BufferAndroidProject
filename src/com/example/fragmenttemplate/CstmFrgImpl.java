@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.Loader;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.fragmenttemplate.loaders.CustomLoader;
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
@@ -23,7 +19,7 @@ public class CstmFrgImpl extends AListFragment<String> {
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText("No results found");
 		
-		new Handler(getActivity().getMainLooper()){
+		/*new Handler(getActivity().getMainLooper()){
 			public void handleMessage(android.os.Message msg) {
 				getActivity().runOnUiThread(new Runnable() {
 					
@@ -33,7 +29,7 @@ public class CstmFrgImpl extends AListFragment<String> {
 					}
 				});
 			};
-		}.sendEmptyMessageDelayed(1, 5000);
+		}.sendEmptyMessageDelayed(1, 5000);*/
 	}
 
 	@Override
@@ -71,7 +67,6 @@ public class CstmFrgImpl extends AListFragment<String> {
 				try {
 					TimeUnit.SECONDS.sleep(3);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

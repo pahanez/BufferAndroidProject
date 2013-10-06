@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,10 +73,6 @@ public abstract class AListFragment<E> extends CustomFragmentItem implements
 				onListItemClick((ListView) parent, view, position, id);
 			}
 		});
-
-		Log.e("p37td8","listView : " + listView);
-		Log.e("p37td8","emptyView : " + emptyView);
-		Log.e("p37td8","progressBar : " + progressBar);
 		configureList(getActivity(), getListView());
 	}
 
