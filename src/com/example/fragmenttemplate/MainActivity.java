@@ -12,7 +12,7 @@ public class MainActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new StringFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new MultFragmentImpl()).commit();
 	}
 
 	@Override
