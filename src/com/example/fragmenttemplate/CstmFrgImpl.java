@@ -69,7 +69,7 @@ public class CstmFrgImpl extends AListFragment<Device> {
 				}
 				List<Device> devices = new ArrayList<Device>();
 				for (int i = 0; i < 100; i++) {
-					devices.add(new Device(i, "Device #" + i,
+					devices.add(new Device(i, "Item #" + i,
 							R.drawable.device_icon));
 				}
 
