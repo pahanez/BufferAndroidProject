@@ -1,25 +1,22 @@
 package com.example.fragmenttemplate;
 
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends FragmentActivity implements LoaderCallbacks<String>{
+public class MainActivity extends Activity implements LoaderCallbacks<String>{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-//		getSupportLoaderManager().initLoader(1, null, this);
 		getLoaderManager().initLoader(1, null, this);
-//		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new MultFragmentImpl()).commit();
 	}
 
 	@Override
 	public android.content.Loader<String> onCreateLoader(int id, Bundle args) {
-		// TODO Auto-generated method stub
 		Log.e("p37td8","onCreateLoader");
 		return new AbstractLoader(this);
 	}
