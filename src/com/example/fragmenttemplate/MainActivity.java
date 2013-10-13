@@ -7,6 +7,7 @@ import android.support.v4.content.Loader;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.example.fragmenttemplate.fragmentsviewpager.FragmentImpl;
 import com.example.fragmenttemplate.fragmentsviewpager.MainFragment;
+import com.example.fragmenttemplate.fragtabhost.TabHostFragment;
 
 public class MainActivity extends SherlockFragmentActivity implements LoaderCallbacks<String>{
 
@@ -14,7 +15,7 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new MainFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new TabHostFragment()).commit();
 	}
 	
 	@Override
