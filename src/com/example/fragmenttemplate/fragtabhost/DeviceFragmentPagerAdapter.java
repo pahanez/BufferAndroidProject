@@ -2,12 +2,13 @@ package com.example.fragmenttemplate.fragtabhost;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fragmenttemplate.fragmentsviewpager.FragmentImpl;
 
-public class DeviceFragmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
+public class DeviceFragmentPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter {
 
 	public static final int DEVICE_ASSIGNED 			= 0;
 	public static final int DEVICE_UNASSIGNED 			= 1;
@@ -22,8 +23,9 @@ public class DeviceFragmentPagerAdapter extends android.support.v4.app.FragmentP
 	private SherlockFragment selected;
 
 	@Override
-	public Fragment getItem(int arg0) {
-		switch (arg0) {
+	public Fragment getItem(int position) {
+		Log.e("p37td8","getItem");
+		switch (position) {
 		case DEVICE_ASSIGNED:
 			return new FragmentImpl();
 		case DEVICE_UNASSIGNED:
@@ -31,6 +33,7 @@ public class DeviceFragmentPagerAdapter extends android.support.v4.app.FragmentP
 		}
 		return null;
 	}
+	
 
 	@Override
 	public int getCount() {

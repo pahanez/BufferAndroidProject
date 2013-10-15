@@ -2,6 +2,7 @@ package com.example.fragmenttemplate.fragtabhost;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +39,7 @@ public class TabHostFragment extends SherlockFragment implements OnTabChangeList
 	/**
 	 * Pager adapter
 	 */
-	protected FragmentPagerAdapter adapter;
+	protected FragmentStatePagerAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,8 +74,8 @@ public class TabHostFragment extends SherlockFragment implements OnTabChangeList
 	 * 
 	 * @return pager adapter
 	 */
-	protected FragmentPagerAdapter createAdapter(){
-		return new DeviceFragmentPagerAdapter(getFragmentManager());
+	protected FragmentStatePagerAdapter createAdapter(){
+		return new DeviceFragmentPagerAdapter(getActivity().getSupportFragmentManager()); 
 	}
 	
 

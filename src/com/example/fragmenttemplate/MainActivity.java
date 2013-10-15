@@ -3,10 +3,10 @@ package com.example.fragmenttemplate;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.util.Log;
+import android.view.View;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.example.fragmenttemplate.fragmentsviewpager.FragmentImpl;
-import com.example.fragmenttemplate.fragmentsviewpager.MainFragment;
 import com.example.fragmenttemplate.fragtabhost.TabHostFragment;
 
 public class MainActivity extends SherlockFragmentActivity implements LoaderCallbacks<String>{
@@ -34,6 +34,10 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	public void onLoaderReset(Loader<String> arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void tempo(View view){
+		getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder, new TabHostFragment()).commit();
 	}
 
 
