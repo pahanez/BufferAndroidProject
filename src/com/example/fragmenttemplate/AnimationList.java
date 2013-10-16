@@ -56,7 +56,7 @@ public class AnimationList extends SherlockListFragment implements OnItemClickLi
 		            R.anim.fdas);
 		    animation.setAnimationListener(new AnimationListener() {
 		        @Override
-		        public void onAnimationStart(Animation animation) {
+		        public void onAnimationStart(Animation animation) { 
 		        }
 
 		        @Override
