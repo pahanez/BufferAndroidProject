@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -29,7 +31,7 @@ public class ViewFlipperFragment extends SherlockFragment implements OnClickList
 		ViewFinder finder = new ViewFinder(view);
 		
 		mViewFlipper = finder.find(R.id.flipper); 
-		mViewFlipper.setDisplayedChild(1);
+		mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount()-1);
 		TextView tv1 = finder.find(R.id.first_flpp_tv);
 		tv1.setText("First Child");
 		TextView tv2 = finder.find(R.id.second_flpp_tv);
