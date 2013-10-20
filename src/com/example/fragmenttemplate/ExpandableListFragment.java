@@ -30,14 +30,10 @@ public class ExpandableListFragment extends SherlockFragment{
 	  
 	  ArrayList<Map<String, String>> groupData;
 	  
-	  // коллекция для элементов одной группы
 	  ArrayList<Map<String, String>> childDataItem;
 
-	  // общая коллекция для коллекций элементов
 	  ArrayList<ArrayList<Map<String, String>>> childData;
-	  // в итоге получится childData = ArrayList<childDataItem>
 	  
-	  // список аттрибутов группы или элемента
 	  Map<String, String> m;
 	
 	@Override
@@ -73,10 +69,8 @@ public class ExpandableListFragment extends SherlockFragment{
             m.put(GROUP_ID, action); 
             childDataItem.add(m);  
         }
-        // добавляем в коллекцию коллекций
         childData.add(childDataItem);
 
-        // создаем коллекцию элементов для второй группы        
         childDataItem = new ArrayList<Map<String, String>>();
         for (String phone : phonesSams) {
           m = new HashMap<String, String>();
@@ -86,9 +80,7 @@ public class ExpandableListFragment extends SherlockFragment{
         childData.add(childDataItem);
 
 
-        // список аттрибутов элементов для чтения
         String childFrom[] = new String[] {GROUP_ID};
-        // список ID view-элементов, в которые будет помещены аттрибуты элементов
         int childTo[] = new int[] {android.R.id.text1};
         
         SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(
