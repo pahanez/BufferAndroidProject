@@ -2,15 +2,20 @@ package com.example.fragmenttemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fragmenttemplate.utils.ViewFinder;
@@ -26,7 +31,6 @@ public class ExpandableListFragment extends SherlockFragment{
 	  
 	  String[] doorBackAction = new String[] {"Sensation", "Desire", "Wildfire", "Hero"};
 	  String[] phonesSams = new String[] {"Galaxy S II", "Galaxy Nexus", "Wave"};
-	  String[] phonesLG = new String[] {"Optimus", "Optimus Link", "Optimus Black", "Optimus One"};
 	  
 	  ArrayList<Map<String, String>> groupData;
 	  
@@ -58,7 +62,7 @@ public class ExpandableListFragment extends SherlockFragment{
         }
         
         String groupFrom[] = new String[] {GROUP_ID};
-        int groupTo[] = new int[] {android.R.id.text1};
+        int groupTo[] = new int[] {R.id.action_group_text};
         
 
         childData = new ArrayList<ArrayList<Map<String, String>>>(); 
@@ -83,10 +87,10 @@ public class ExpandableListFragment extends SherlockFragment{
         String childFrom[] = new String[] {GROUP_ID};
         int childTo[] = new int[] {android.R.id.text1};
         
-        SimpleExpandableListAdapter adapter = new SimpleExpandableListAdapter(
+        CustomExpandableListAdapter adapter = new CustomExpandableListAdapter(
             getActivity(),
             groupData,
-            android.R.layout.simple_expandable_list_item_1,
+            R.layout.action_group_view,
             groupFrom,
             groupTo,
             childData,
@@ -99,5 +103,167 @@ public class ExpandableListFragment extends SherlockFragment{
         
 		
 	}
+	
+	private class CustomExpandableListAdapter extends BaseExpandableListAdapter{
+	    private List<? extends Map<String, ?>> mGroupData;
+	    private int mExpandedGroupLayout;
+	    private int mCollapsedGroupLayout;
+	    private String[] mGroupFrom;
+	    private int[] mGroupTo;
+	    
+	    private List<? extends List<? extends Map<String, ?>>> mChildData;
+	    private int mChildLayout;
+	    private int mLastChildLayout;
+	    private String[] mChildFrom;
+	    private int[] mChildTo;
+	    
+	    private LayoutInflater mInflater;
+	    
+	    public CustomExpandableListAdapter(Context context,
+	            List<? extends Map<String, ?>> groupData, int groupLayout,
+	            String[] groupFrom, int[] groupTo,
+	            List<? extends List<? extends Map<String, ?>>> childData,
+	            int childLayout, String[] childFrom, int[] childTo) {
+	        this(context, groupData, groupLayout, groupLayout, groupFrom, groupTo, childData,
+	                childLayout, childLayout, childFrom, childTo);
+	    }
+
+	    public CustomExpandableListAdapter(Context context,
+	            List<? extends Map<String, ?>> groupData, int expandedGroupLayout,
+	            int collapsedGroupLayout, String[] groupFrom, int[] groupTo,
+	            List<? extends List<? extends Map<String, ?>>> childData,
+	            int childLayout, String[] childFrom, int[] childTo) {
+	        this(context, groupData, expandedGroupLayout, collapsedGroupLayout,
+	                groupFrom, groupTo, childData, childLayout, childLayout,
+	                childFrom, childTo);
+	    }
+
+	    public CustomExpandableListAdapter(Context context,
+	            List<? extends Map<String, ?>> groupData, int expandedGroupLayout,
+	            int collapsedGroupLayout, String[] groupFrom, int[] groupTo,
+	            List<? extends List<? extends Map<String, ?>>> childData,
+	            int childLayout, int lastChildLayout, String[] childFrom,
+	            int[] childTo) {
+	        mGroupData = groupData;
+	        mExpandedGroupLayout = expandedGroupLayout;
+	        mCollapsedGroupLayout = collapsedGroupLayout;
+	        mGroupFrom = groupFrom;
+	        mGroupTo = groupTo;
+	        
+	        mChildData = childData;
+	        mChildLayout = childLayout;
+	        mLastChildLayout = lastChildLayout;
+	        mChildFrom = childFrom;
+	        mChildTo = childTo;
+	        
+	        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    }
+	    
+	    public Object getChild(int groupPosition, int childPosition) {
+	        return mChildData.get(groupPosition).get(childPosition);
+	    }
+
+	    public long getChildId(int groupPosition, int childPosition) {
+	        return childPosition;
+	    }
+
+	    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+	            View convertView, ViewGroup parent) {
+	        View v;
+	        if (convertView == null) {
+	            v = newChildView(isLastChild, parent);
+	        } else {
+	            v = convertView;
+	        }
+	        bindChildView(v, mChildData.get(groupPosition).get(childPosition), mChildFrom, mChildTo);
+	        return v;
+	    }
+
+	    /**
+	     * Instantiates a new View for a child.
+	     * @param isLastChild Whether the child is the last child within its group.
+	     * @param parent The eventual parent of this new View.
+	     * @return A new child View
+	     */
+	    public View newChildView(boolean isLastChild, ViewGroup parent) {
+	        return mInflater.inflate((isLastChild) ? mLastChildLayout : mChildLayout, parent, false);
+	    }
+	    
+	    
+	    private void bindChildView(View view, Map<String, ?> data, String[] from, int[] to){
+	    	 int len = to.length;
+	    	 for (int i = 0; i < len; i++) {
+		            TextView v = (TextView)view.findViewById(to[i]);
+		            if (v != null) {
+		                v.setText((String)data.get(from[i]));
+		            }
+		        }
+	    }
+	    
+	    private void bindGroupView(View view,final Map<String, ?> data,final String[] from, int[] to){
+	    	 int len = to.length;
+	    	 for (int i = 0; i < len; i++) {
+		            TextView v = (TextView)view.findViewById(to[i]);
+		            if (v != null) {
+		                v.setText((String)data.get(from[i]));
+		            }
+		        }
+	    	 ((Button)view.findViewById(R.id.action_group_button)).setOnClickListener(new OnClickListener() {
+	    		 
+	    		 @Override
+	    		 public void onClick(View v) {
+	    			 Log.e("p37td8","actiongroup_pressed " + data.get(from[0]));
+	    		 }
+	    	 });
+	    }
+
+	    public int getChildrenCount(int groupPosition) {
+	        return mChildData.get(groupPosition).size();
+	    }
+
+	    public Object getGroup(int groupPosition) {
+	        return mGroupData.get(groupPosition);
+	    }
+
+	    public int getGroupCount() {
+	        return mGroupData.size();
+	    }
+
+	    public long getGroupId(int groupPosition) {
+	        return groupPosition;
+	    }
+
+	    public View getGroupView(int groupPosition, boolean isExpanded, View convertView,
+	            ViewGroup parent) {
+	        View v;
+	        if (convertView == null) {
+	            v = newGroupView(isExpanded, parent);
+	        } else {
+	            v = convertView;
+	        }
+	        bindGroupView(v, mGroupData.get(groupPosition), mGroupFrom, mGroupTo);
+	        return v;
+	    }
+
+	    /**
+	     * Instantiates a new View for a group.
+	     * @param isExpanded Whether the group is currently expanded.
+	     * @param parent The eventual parent of this new View.
+	     * @return A new group View
+	     */
+	    public View newGroupView(boolean isExpanded, ViewGroup parent) {
+	        return mInflater.inflate((isExpanded) ? mExpandedGroupLayout : mCollapsedGroupLayout,
+	                parent, false);
+	    }
+
+	    public boolean isChildSelectable(int groupPosition, int childPosition) {
+	        return true;
+	    }
+
+	    public boolean hasStableIds() {
+	        return true;
+	    }
+
+}
 	
 }
