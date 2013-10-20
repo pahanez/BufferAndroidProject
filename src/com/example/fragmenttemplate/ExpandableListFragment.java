@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.example.fragmenttemplate.utils.ViewFinder;
+import com.github.kevinsawicki.wishlist.ViewUtils;
 
 public class ExpandableListFragment extends SherlockFragment{
 	
@@ -58,7 +60,7 @@ public class ExpandableListFragment extends SherlockFragment{
         for (String action : actions) {
           m = new HashMap<String, String>();
             m.put(GROUP_ID, action);
-            groupData.add(m);  
+            groupData.add(m); 
         }
         
         String groupFrom[] = new String[] {GROUP_ID};
@@ -73,6 +75,7 @@ public class ExpandableListFragment extends SherlockFragment{
             m.put(GROUP_ID, action); 
             childDataItem.add(m);  
         }
+        addFooter(childDataItem);
         childData.add(childDataItem);
 
         childDataItem = new ArrayList<Map<String, String>>();
@@ -81,29 +84,53 @@ public class ExpandableListFragment extends SherlockFragment{
             m.put(GROUP_ID, phone);
             childDataItem.add(m);  
         }
+        addFooter(childDataItem);
         childData.add(childDataItem);
 
 
         String childFrom[] = new String[] {GROUP_ID};
-        int childTo[] = new int[] {android.R.id.text1};
+        int childTo[] = new int[] {R.id.action_item_text};
         
-        CustomExpandableListAdapter adapter = new CustomExpandableListAdapter(
+        final CustomExpandableListAdapter adapter = new CustomExpandableListAdapter(
             getActivity(),
             groupData,
             R.layout.action_group_view,
             groupFrom,
             groupTo,
             childData,
-            android.R.layout.simple_list_item_1,
+            R.layout.action_item_view,
             childFrom,
             childTo);
         
         
         mExpandableListView.setAdapter(adapter);
+        for(int i = 0; i<adapter.getGroupCount();i++)
+        	mExpandableListView.expandGroup(i); //open all groups when started
+        mExpandableListView.setOnChildClickListener(new OnChildClickListener() {
+			
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				if(( childData.get(groupPosition).size() - 1 ) == childPosition){
+					Log.e("p37td8","add_item");
+					 m = new HashMap<String, String>();
+					 m.put(GROUP_ID, "new item");
+					childData.get(groupPosition).add(m);
+					adapter.notifyDataSetChanged();
+				}
+				return false;
+			}
+		});
         
 		
 	}
 	
+	private void addFooter(ArrayList<Map<String, String>> child) {
+		 m = new HashMap<String, String>();
+         m.put(GROUP_ID, "(+) Add item");
+         childDataItem.add(m);  
+	}
+
 	private class CustomExpandableListAdapter extends BaseExpandableListAdapter{
 	    private List<? extends Map<String, ?>> mGroupData;
 	    private int mExpandedGroupLayout;
@@ -175,7 +202,7 @@ public class ExpandableListFragment extends SherlockFragment{
 	        } else {
 	            v = convertView;
 	        }
-	        bindChildView(v, mChildData.get(groupPosition).get(childPosition), mChildFrom, mChildTo);
+	        bindChildView(v, mChildData.get(groupPosition).get(childPosition), mChildFrom, mChildTo,groupPosition);
 	        return v;
 	    }
 
@@ -190,7 +217,7 @@ public class ExpandableListFragment extends SherlockFragment{
 	    }
 	    
 	    
-	    private void bindChildView(View view, Map<String, ?> data, String[] from, int[] to){
+	    private void bindChildView(View view, Map<String, ?> data, String[] from, int[] to,int groupPosition){
 	    	 int len = to.length;
 	    	 for (int i = 0; i < len; i++) {
 		            TextView v = (TextView)view.findViewById(to[i]);
@@ -198,6 +225,9 @@ public class ExpandableListFragment extends SherlockFragment{
 		                v.setText((String)data.get(from[i]));
 		            }
 		        }
+	    	 Button button = ((Button)view.findViewById(R.id.action_item_button));
+	    	 button.setText("b" + mChildData.get(groupPosition).indexOf(data));
+	    	 
 	    }
 	    
 	    private void bindGroupView(View view,final Map<String, ?> data,final String[] from, int[] to){
@@ -263,7 +293,7 @@ public class ExpandableListFragment extends SherlockFragment{
 	    public boolean hasStableIds() {
 	        return true;
 	    }
-
+	    
 }
 	
 }
