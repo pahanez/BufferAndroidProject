@@ -15,7 +15,7 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new ExpendableListFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new ExpandableListFragment()).commit();
 	}
 	
 	@Override
