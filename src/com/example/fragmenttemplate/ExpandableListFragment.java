@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 
@@ -17,19 +18,16 @@ import com.example.fragmenttemplate.utils.ViewFinder;
 public class ExpandableListFragment extends SherlockFragment{
 	
 	private ExpandableListView mExpandableListView;
+	private static final String GROUP_ID = "action_id";
 	
 	
 	
-	
-	  // названия компаний (групп)
-	  String[] groups = new String[] {"HTC", "Samsung", "LG"};
+	  String[] actions = new String[] {"Door Back", "Ligth Back"};
 	  
-	  // названия телефонов (элементов)
-	  String[] phonesHTC = new String[] {"Sensation", "Desire", "Wildfire", "Hero"};
+	  String[] doorBackAction = new String[] {"Sensation", "Desire", "Wildfire", "Hero"};
 	  String[] phonesSams = new String[] {"Galaxy S II", "Galaxy Nexus", "Wave"};
 	  String[] phonesLG = new String[] {"Optimus", "Optimus Link", "Optimus Black", "Optimus One"};
 	  
-	  // коллекция для групп
 	  ArrayList<Map<String, String>> groupData;
 	  
 	  // коллекция для элементов одной группы
@@ -56,30 +54,23 @@ public class ExpandableListFragment extends SherlockFragment{
 		
 		
 		
-		// заполняем коллекцию групп из массива с названиями групп
         groupData = new ArrayList<Map<String, String>>();
-        for (String group : groups) {
-          // заполняем список аттрибутов для каждой группы
+        for (String action : actions) {
           m = new HashMap<String, String>();
-            m.put("groupName", group); // имя компании
+            m.put(GROUP_ID, action);
             groupData.add(m);  
         }
         
-        // список аттрибутов групп для чтения
-        String groupFrom[] = new String[] {"groupName"};
-        // список ID view-элементов, в которые будет помещены аттрибуты групп
+        String groupFrom[] = new String[] {GROUP_ID};
         int groupTo[] = new int[] {android.R.id.text1};
         
 
-        // создаем коллекцию для коллекций элементов 
         childData = new ArrayList<ArrayList<Map<String, String>>>(); 
         
-        // создаем коллекцию элементов для первой группы
         childDataItem = new ArrayList<Map<String, String>>();
-        // заполняем список аттрибутов для каждого элемента
-        for (String phone : phonesHTC) {
+        for (String action : doorBackAction) {
           m = new HashMap<String, String>();
-            m.put("phoneName", phone); // название телефона
+            m.put(GROUP_ID, action); 
             childDataItem.add(m);  
         }
         // добавляем в коллекцию коллекций
@@ -89,22 +80,14 @@ public class ExpandableListFragment extends SherlockFragment{
         childDataItem = new ArrayList<Map<String, String>>();
         for (String phone : phonesSams) {
           m = new HashMap<String, String>();
-            m.put("phoneName", phone);
+            m.put(GROUP_ID, phone);
             childDataItem.add(m);  
         }
         childData.add(childDataItem);
 
-        // создаем коллекцию элементов для третьей группы        
-        childDataItem = new ArrayList<Map<String, String>>();
-        for (String phone : phonesLG) {
-          m = new HashMap<String, String>();
-            m.put("phoneName", phone);
-            childDataItem.add(m);  
-        }
-        childData.add(childDataItem);
 
         // список аттрибутов элементов для чтения
-        String childFrom[] = new String[] {"phoneName"};
+        String childFrom[] = new String[] {GROUP_ID};
         // список ID view-элементов, в которые будет помещены аттрибуты элементов
         int childTo[] = new int[] {android.R.id.text1};
         
@@ -121,7 +104,6 @@ public class ExpandableListFragment extends SherlockFragment{
         
         
         mExpandableListView.setAdapter(adapter);
-        
         
 		
 	}
