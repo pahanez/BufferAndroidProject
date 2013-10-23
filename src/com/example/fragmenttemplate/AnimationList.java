@@ -81,13 +81,6 @@ public class AnimationList extends SherlockListFragment implements OnItemClickLi
 		    });
 	}
 
-	private void initAnimation() {
-		Animation animation = new AlphaAnimation(1.0f, 0.0f);
-		animation.setDuration(500);
-		LayoutAnimationController lac = new LayoutAnimationController(animation);
-		mListView.setLayoutAnimation(lac);
-	}
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) { 
