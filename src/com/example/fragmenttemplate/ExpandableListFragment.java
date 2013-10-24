@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,13 +20,17 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.example.fragmenttemplate.utils.DetachableResultReceiver;
+import com.example.fragmenttemplate.utils.DetachableResultReceiver.Receiver;
 import com.example.fragmenttemplate.utils.ViewFinder;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 
-public class ExpandableListFragment extends SherlockFragment{
+public class ExpandableListFragment extends SherlockFragment implements Receiver{
 	
 	private ExpandableListView mExpandableListView;
 	private static final String GROUP_ID = "action_id";
+	
+	private DetachableResultReceiver mResultReceiver;
 	
 	
 	
@@ -45,6 +50,8 @@ public class ExpandableListFragment extends SherlockFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		mResultReceiver = new DetachableResultReceiver(new Handler());
+		mResultReceiver.setReceiver(this);
 		return inflater.inflate(R.layout.edit_frag, null);
 	}
 	
@@ -295,5 +302,11 @@ public class ExpandableListFragment extends SherlockFragment{
 	    }
 	    
 }
+
+	@Override
+	public void onReceiveResult(int resultCode, Bundle resultData) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
