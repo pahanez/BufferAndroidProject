@@ -25,7 +25,7 @@ import com.example.fragmenttemplate.utils.DetachableResultReceiver.Receiver;
 import com.example.fragmenttemplate.utils.ViewFinder;
 import com.github.kevinsawicki.wishlist.ViewUtils;
 
-public class ExpandableListFragment extends SherlockFragment implements Receiver{
+public class ExpandableListFragment extends SherlockFragment {
 	
 	private ExpandableListView mExpandableListView;
 	private static final String GROUP_ID = "action_id";
@@ -50,8 +50,6 @@ public class ExpandableListFragment extends SherlockFragment implements Receiver
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		mResultReceiver = new DetachableResultReceiver(new Handler());
-		mResultReceiver.setReceiver(this);
 		return inflater.inflate(R.layout.edit_frag, null);
 	}
 	
@@ -303,10 +301,4 @@ public class ExpandableListFragment extends SherlockFragment implements Receiver
 	    
 }
 
-	@Override
-	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

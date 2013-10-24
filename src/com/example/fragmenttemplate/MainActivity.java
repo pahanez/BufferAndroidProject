@@ -1,13 +1,12 @@
 package com.example.fragmenttemplate;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.util.Log;
-import android.view.View;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.example.fragmenttemplate.fragtabhost.TabHostFragment;
 
 public class MainActivity extends SherlockFragmentActivity implements LoaderCallbacks<String>{
 
@@ -15,7 +14,19 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new ExpandableListFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new ReceiverFragment()).commit();
+	}
+	
+	public void initFragment(Fragment fragment, String id){
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//		ft.add(fragment, id);
+		ft.replace(R.id.fragment_holder, fragment);
+		ft.addToBackStack(id);
+		ft.commit();
+	}
+	
+	public void popFragment(){
+		getSupportFragmentManager().popBackStack();
 	}
 	
 	@Override
