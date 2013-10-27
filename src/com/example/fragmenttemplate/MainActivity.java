@@ -14,14 +14,14 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new ReceiverFragment()).commit();
+		getSupportFragmentManager().beginTransaction().add(R.id.fragment_holder, new CameraFr()).commit();
 	}
 	
 	public void initFragment(Fragment fragment, String id){
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //		ft.add(fragment, id);
 		ft.replace(R.id.fragment_holder, fragment);
-		ft.addToBackStack(id);
+		ft.addToBackStack(id); 
 		ft.commit();
 	}
 	
