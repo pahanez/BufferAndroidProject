@@ -6,9 +6,15 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.util.Log;
 
 public class ApplicationClass extends Application{
+	
+	private static final String TAG = ApplicationClass.class.getSimpleName();
 	
     private static final int CORE_POOL_SIZE = 5;
 
@@ -41,5 +47,23 @@ public class ApplicationClass extends Application{
     
 	private void setupLogging() {
 //		Log.setLogLevel(android.util.Log.VERBOSE);
+	}
+	
+	public static Context getContext() {
+		return sAppInstance.getApplicationContext();
+	}
+	
+	public static String getApplicationVersion() {
+		final Context ctx = sAppInstance;
+		String version = null;
+		PackageManager pm = ctx.getPackageManager();
+		try {
+			PackageInfo info = pm.getPackageInfo(ctx.getPackageName(), 0);
+			version = info.versionName;
+		} catch (NameNotFoundException e) {
+			Log.e(TAG, "can't get app version", e);
+			version = "?";
+		}
+		return version;
 	}
 }
