@@ -48,5 +48,5 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 	}
 	
 
-
+//31.10.2013 Ubuntu One App investigation
 }
