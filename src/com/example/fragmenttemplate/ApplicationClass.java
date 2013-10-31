@@ -6,12 +6,10 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import android.app.Application;
+import android.util.Log;
 
 public class ApplicationClass extends Application{
 	
-	/**
-	 * From GreenDroid
-	 * */
     private static final int CORE_POOL_SIZE = 5;
 
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
@@ -30,4 +28,18 @@ public class ApplicationClass extends Application{
     }
 
     private ExecutorService mExecutorService;
+    
+    
+    
+    private static ApplicationClass sAppInstance;
+    
+    public ApplicationClass(){
+    	super();
+    	sAppInstance = this;
+    	setupLogging();
+    }
+    
+	private void setupLogging() {
+//		Log.setLogLevel(android.util.Log.VERBOSE);
+	}
 }
