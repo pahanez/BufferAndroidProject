@@ -52,4 +52,5 @@ public class MainActivity extends SherlockFragmentActivity implements LoaderCall
 //01.11.2013 git@github.com:casidiablo/groundy.git
 //13.11.2013 Ubuntu One GaleryActivity
 //14.11.2013 Ubuntu One Login Process
+//19.11.2013 Ubuntu One
 }
