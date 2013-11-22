@@ -4,5 +4,6 @@
     <color name="list_divider_top">#E2E2E2</color>
     <color name="list_divider_bottom">#FFFFFF</color>
     <color name="text_light">#AEAEAE</color>
+    <color name="green">#368746</color>
 
 </resources>
