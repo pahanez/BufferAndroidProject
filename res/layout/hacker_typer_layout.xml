@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <EditText xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:inputType="text"
     android:background="@drawable/typer_back"
     android:textColor="@color/green"
     android:gravity="top"
     android:singleLine="false"
+    android:inputType="text"
+    android:id="@+id/hacker_typer_et"
     android:layout_height="match_parent"
     android:orientation="vertical"/>
