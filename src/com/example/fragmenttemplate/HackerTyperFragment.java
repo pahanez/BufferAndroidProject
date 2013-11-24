@@ -1,6 +1,11 @@
 package com.example.fragmenttemplate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +28,8 @@ public class HackerTyperFragment extends SherlockFragment {
 	
 	private EditText mHackerViewHidden;
 	private TextView mHackerView;
+	private BufferedReader mReader;
+	private char [] chars = new char[3];
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +70,7 @@ public class HackerTyperFragment extends SherlockFragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				Log.e("p37td8" , "onTextChanged");
-				mHackerView.setText(mHackerView.getText() + " 11 111111111 1 00 111");
+				mHackerView.setText(mHackerView.getText() + getNextData());
 			}
 			
 			@Override
@@ -77,5 +84,21 @@ public class HackerTyperFragment extends SherlockFragment {
 				//EMPTY
 			}
 		});
+		try {
+			
+			mReader = new BufferedReader(new InputStreamReader(getActivity().getAssets().open("kexec.c")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	String getNextData(){
+		try {
+			mReader.read(chars); 
+			return new String(chars	, 0	, chars.length);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
