@@ -4,8 +4,8 @@
     android:background="@drawable/typer_back"
     android:textColor="@color/green"
     android:gravity="top"
-    android:singleLine="false"
     android:inputType="text"
+    android:singleLine="false"
     android:id="@+id/hacker_typer_et"
     android:layout_height="match_parent"
     android:orientation="vertical"/>
