@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/typer_back"
-        android:gravity="top"
+        android:gravity="bottom"
         android:orientation="vertical"
         android:singleLine="false"
         android:textColor="@color/green" />

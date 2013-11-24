@@ -63,7 +63,7 @@ public class HackerTyperFragment extends SherlockFragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				Log.e("p37td8" , "onTextChanged");
-				mHackerView.setText(mHackerView.getText() + " 11 ");
+				mHackerView.setText(mHackerView.getText() + " 11 111111111 1 00 111");
 			}
 			
 			@Override
